@@ -102,7 +102,7 @@ public class KernelWakelockReader {
                         is = new FileInputStream(sWakeupSourceFile);
                         wakeup_sources = true;
                     } catch (java.io.FileNotFoundException e2) {
-                        Slog.wtf(TAG, "neither " + sWakelockFile + " nor " +
+                        Slog.w(TAG, "neither " + sWakelockFile + " nor " +
                                 sWakeupSourceFile + " exists");
                         return null;
                     }
@@ -129,7 +129,7 @@ public class KernelWakelockReader {
 
             if (len > 0) {
                 if (len >= mKernelWakelockBuffer.length) {
-                    Slog.wtf(TAG, "Kernel wake locks exceeded mKernelWakelockBuffer size "
+                    Slog.w(TAG, "Kernel wake locks exceeded mKernelWakelockBuffer size "
                             + mKernelWakelockBuffer.length);
                 }
                 int i;
@@ -163,7 +163,7 @@ public class KernelWakelockReader {
                 mSuspendControlService = ISuspendControlService.Stub.asInterface(
                     ServiceManager.getServiceOrThrow("suspend_control"));
             } catch (ServiceNotFoundException e) {
-                Slog.wtf(TAG, "Required service suspend_control not available", e);
+                Slog.w(TAG, "Required service suspend_control not available", e);
                 return null;
             }
         }
