@@ -274,6 +274,8 @@ filegroup {
         ":vold_aidl",
         "core/java/android/pocket/IPocketService.aidl",
         "core/java/android/pocket/IPocketCallback.aidl",
+        "telephony/java/com/android/internal/telephony/ISmsSecurityService.aidl",
+        "telephony/java/com/android/internal/telephony/ISmsSecurityAgent.aidl",
 
         // For the generated R.java and Manifest.java
         ":framework-res{.aapt.srcjar}",
