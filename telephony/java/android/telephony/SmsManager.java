@@ -388,6 +388,7 @@ public final class SmsManager {
     public void sendTextMessage(
             String destinationAddress, String scAddress, String text,
             PendingIntent sentIntent, PendingIntent deliveryIntent) {
+        android.util.SeempLog.record_str(75, destinationAddress);
         sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent,
                 true /* persistMessage*/, null, null);
     }
@@ -600,6 +601,46 @@ public final class SmsManager {
             PendingIntent sentIntent, PendingIntent deliveryIntent) {
         sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent,
                 false /* persistMessage */, null, null);
+    }
+
+    /**
+     * A variant of {@link SmsManager#sendTextMessage} that allows self to be the caller. This is
+     * for internal use only.
+     *
+     * <p class="note"><strong>Note:</strong> This method is intended for internal use by carrier
+     * applications or the Telephony framework and will never trigger an SMS disambiguation
+     * dialog. If this method is called on a device that has multiple active subscriptions, this
+     * {@link SmsManager} instance has been created with {@link #getDefault()}, and no user-defined
+     * default subscription is defined, the subscription ID associated with this message will be
+     * INVALID, which will result in the SMS being sent on the subscription associated with logical
+     * slot 0. Use {@link #getSmsManagerForSubscriptionId(int)} to ensure the SMS is sent on the
+     * correct subscription.
+     * </p>
+     *
+     * @param persistMessage whether to persist the sent message in the SMS app. the caller must be
+     * the Phone process if set to false.
+     *
+     * @hide
+     */
+    public void sendTextMessageWithSelfPermissions(
+            String destinationAddress, String scAddress, String text,
+            PendingIntent sentIntent, PendingIntent deliveryIntent, boolean persistMessage) {
+        android.util.SeempLog.record_str(75, destinationAddress);
+        if (TextUtils.isEmpty(destinationAddress)) {
+            throw new IllegalArgumentException("Invalid destinationAddress");
+        }
+        if (TextUtils.isEmpty(text)) {
+            throw new IllegalArgumentException("Invalid message body");
+        }
+        try {
+            ISms iSms = getISmsServiceOrThrow();
+            iSms.sendTextForSubscriberWithSelfPermissions(getSubscriptionId(),
+                    ActivityThread.currentPackageName(),
+                    destinationAddress,
+                    scAddress, text, sentIntent, deliveryIntent, persistMessage);
+        } catch (RemoteException ex) {
+            notifySmsGenericError(sentIntent);
+        }
     }
 
     private void sendTextMessageInternal(
@@ -1332,6 +1373,7 @@ public final class SmsManager {
     public void sendDataMessage(
             String destinationAddress, String scAddress, short destinationPort,
             byte[] data, PendingIntent sentIntent, PendingIntent deliveryIntent) {
+        android.util.SeempLog.record_str(73, destinationAddress);
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
         }
@@ -1358,6 +1400,53 @@ public final class SmsManager {
             }
         });
     }
+
+    /**
+     * Send a data based SMS to a specific application port.
+     *
+     * <p class="note"><strong>Note:</strong> Using this method requires that your app has the
+     * {@link android.Manifest.permission#SEND_SMS} permission.</p>
+     *
+     * <p class="note"><strong>Note:</strong> If {@link #getDefault()} is used to instantiate this
+     * manager on a multi-SIM device, this operation may fail sending the SMS message because no
+     * suitable default subscription could be found. In this case, if {@code sentIntent} is
+     * non-null, then the {@link PendingIntent} will be sent with an error code
+     * {@code RESULT_ERROR_GENERIC_FAILURE} and an extra string {@code "noDefault"} containing the
+     * boolean value {@code true}. See {@link #getDefault()} for more information on the conditions
+     * where this operation may fail.
+     * </p>
+     *
+     * @param destinationAddress the address to send the message to
+     * @param scAddress is the service center address or null to use
+     *  the current default SMSC
+     * @param destinationPort the port to deliver the message to
+     * @param data the body of the message to send
+     * @param sentIntent if not NULL this <code>PendingIntent</code> is
+     *  broadcast when the message is successfully sent, or failed.
+     *  The result code will be <code>Activity.RESULT_OK</code> for success,
+     *  or one of these errors:<br>
+     *  <code>RESULT_ERROR_GENERIC_FAILURE</code><br>
+     *  <code>RESULT_ERROR_RADIO_OFF</code><br>
+     *  <code>RESULT_ERROR_NULL_PDU</code><br>
+     *  For <code>RESULT_ERROR_GENERIC_FAILURE</code> the sentIntent may include
+     *  the extra "errorCode" containing a radio technology specific value,
+     *  generally only useful for troubleshooting.<br>
+     *  The per-application based SMS control checks sentIntent. If sentIntent
+     *  is NULL the caller will be checked against all unknown applications,
+     *  which cause smaller number of SMS to be sent in checking period.
+     * @param deliveryIntent if not NULL this <code>PendingIntent</code> is
+     *  broadcast when the message is delivered to the recipient.  The
+     *  raw pdu of the status report is in the extended data ("pdu").
+     *
+     * @throws IllegalArgumentException if destinationAddress or data are empty
+     */
+    public void sendDataMessage(
+            String destinationAddress, String scAddress, short destinationPort,
+            byte[] data, PendingIntent sentIntent, PendingIntent deliveryIntent) {
+        android.util.SeempLog.record_str(73, destinationAddress);
+        if (TextUtils.isEmpty(destinationAddress)) {
+            throw new IllegalArgumentException("Invalid destinationAddress");
+        }
 
     /**
      * Get the SmsManager associated with the default subscription id. The instance will always be
@@ -1618,6 +1707,7 @@ public final class SmsManager {
     @RequiresPermission(Manifest.permission.ACCESS_MESSAGES_ON_ICC)
     public boolean copyMessageToIcc(
             @Nullable byte[] smsc, @NonNull byte[] pdu, @StatusOnIcc int status) {
+        android.util.SeempLog.record(79);
         boolean success = false;
 
         if (pdu == null) {
@@ -1662,6 +1752,7 @@ public final class SmsManager {
     @SystemApi
     @RequiresPermission(Manifest.permission.ACCESS_MESSAGES_ON_ICC)
     public boolean deleteMessageFromIcc(int messageIndex) {
+        android.util.SeempLog.record(80);
         boolean success = false;
 
         try {
@@ -1705,6 +1796,7 @@ public final class SmsManager {
     @UnsupportedAppUsage
     @RequiresPermission(Manifest.permission.ACCESS_MESSAGES_ON_ICC)
     public boolean updateMessageOnIcc(int messageIndex, int newStatus, byte[] pdu) {
+        android.util.SeempLog.record(81);
         boolean success = false;
 
         try {
