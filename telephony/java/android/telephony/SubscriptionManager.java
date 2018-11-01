@@ -928,6 +928,8 @@ public class SubscriptionManager {
 
         public OnSubscriptionsChangedListener() {
             mExecutor = new HandlerExecutor(new OnSubscriptionsChangedListenerHandler());
+            mHandler = new OnSubscriptionsChangedListenerHandler(Looper.myLooper() == null ?
+                Looper.getMainLooper() : Looper.myLooper());
         }
 
         /**
