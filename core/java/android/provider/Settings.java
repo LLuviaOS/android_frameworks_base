@@ -9453,6 +9453,19 @@ public final class Settings {
                  BOOLEAN_VALIDATOR;
 
         /**
+         * Show or hide clock
+         * 0 - right
+         * 1 - center
+         * 2 - left (default)
+         * @hide
+         */
+        public static final String STATUSBAR_CLOCK_POSITION = "status_bar_clock_position";
+
+        /** @hide */
+        private static final Validator STATUSBAR_CLOCK_POSITION_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
+
+        /**
          * AM/PM Style for clock options
          * 0 - No AM/PM  (default)
          * 1 - Small AM/PM
@@ -9932,6 +9945,7 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_STYLE, STATUSBAR_CLOCK_DATE_STYLE_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_FORMAT, STATUSBAR_CLOCK_DATE_FORMAT_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_DATE_DISPLAY, STATUSBAR_CLOCK_DATE_DISPLAY_VALIDATOR);
+            VALIDATORS.put(STATUSBAR_CLOCK_POSITION, STATUSBAR_CLOCK_POSITION_VALIDATOR);
         }
 
         /**
