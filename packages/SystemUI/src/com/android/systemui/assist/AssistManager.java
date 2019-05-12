@@ -449,9 +449,7 @@ public class AssistManager implements ConfigurationChangedReceiver {
         return getAssistInfoForUser(KeyguardUpdateMonitor.getCurrentUser());
     }
 
-    public void showDisclosure() {
-        mAssistDisclosure.postShow();
-    }
+    public void showDisclosure() {}
 
     public void onLockscreenShown() {
         mAssistUtils.onLockscreenShown();
