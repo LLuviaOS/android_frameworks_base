@@ -1575,6 +1575,7 @@ public class ServiceState implements Parcelable {
                 return AccessNetworkType.CDMA2000;
             case RIL_RADIO_TECHNOLOGY_LTE:
             case RIL_RADIO_TECHNOLOGY_LTE_CA:
+            case RIL_RADIO_TECHNOLOGY_NR:
                 return AccessNetworkType.EUTRAN;
             case RIL_RADIO_TECHNOLOGY_NR:
                 return AccessNetworkType.NGRAN;
