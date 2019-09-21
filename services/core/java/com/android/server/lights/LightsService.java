@@ -229,6 +229,7 @@ public class LightsService extends SystemService {
     private final class LightImpl extends LogicalLight {
         private final IBinder mDisplayToken;
         private final int mSurfaceControlMaximumBrightness;
+        private final int mUseScaleBrightness;
 
         private LightImpl(Context context, HwLight hwLight) {
             mHwLight = hwLight;
@@ -246,6 +247,7 @@ public class LightsService extends SystemService {
                 }
             }
             mSurfaceControlMaximumBrightness = maximumBrightness;
+            mUseScaleBrightness = context.getResources().getInteger(com.android.internal.R.integer.config_useScaleBrightness);
         }
 
         @Override
@@ -278,9 +280,13 @@ public class LightsService extends SystemService {
                     SurfaceControl.setDisplayBrightness(mDisplayToken,
                             (float) brightness / mSurfaceControlMaximumBrightness);
                 } else {
-                    int color = brightness & 0x000000ff;
-                    color = 0xff000000 | (color << 16) | (color << 8) | color;
-                    setLightLocked(color, LIGHT_FLASH_NONE, 0, 0, brightnessMode);
+                    if (mUseScaleBrightness == -1){
+                        int color = brightness & 0x000000ff;
+                        color = 0xff000000 | (color << 16) | (color << 8) | color;
+                        setLightLocked(color, LIGHT_FLASH_NONE, 0, 0, brightnessMode);
+                    }else{
+                        setLightLocked(brightness * mUseScaleBrightness / 255, LIGHT_FLASH_NONE, 0, 0, brightnessMode);
+                    }
                 }
             }
         }
