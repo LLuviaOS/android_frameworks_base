@@ -4870,6 +4870,17 @@ public final class Settings {
         public static final String QS_BATTERY_MODE = "qs_battery_mode";
 
         /**
+         *  Enable statusbar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
+        /** @hide */
+        private static final Validator DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+
+        /**
          * Whether or not to show the battery percentage in the status bar
          *    0: Hide the battery percentage (default)
          *    1: Display the battery percentage inside the icon
@@ -4902,7 +4913,6 @@ public final class Settings {
          * 1 - QS Header
          * @hide
          */
-
          public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
 
         /**
@@ -4984,6 +4994,7 @@ public final class Settings {
             USE_OLD_MOBILETYPE,
             NOTIFICATION_LIGHT_PULSE,
             SCREENSHOT_SHUTTER_SOUND,
+            DOUBLE_TAP_SLEEP_GESTURE,
             BACK_GESTURE_HEIGHT,
             LOCKSCREEN_MEDIA_METADATA,
         };
@@ -5114,6 +5125,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_PANEL_BG_ALPHA);
             PRIVATE_SETTINGS.add(SCREENSHOT_SHUTTER_SOUND);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HEIGHT);
+            PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
@@ -5224,6 +5236,8 @@ public final class Settings {
                     SCREENSHOT_SHUTTER_SOUND_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_ALPHA, QS_PANEL_BG_ALPHA_VALIDATOR);
+            VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE,
+                    DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_HEIGHT, BACK_GESTURE_HEIGHT_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_MEDIA_METADATA, LOCKSCREEN_MEDIA_METADATA_VALIDATOR);
         }
