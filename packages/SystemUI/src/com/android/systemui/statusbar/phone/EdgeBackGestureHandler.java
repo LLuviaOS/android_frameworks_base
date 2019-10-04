@@ -255,6 +255,12 @@ public class EdgeBackGestureHandler implements DisplayListener {
         updateEdgeHeightValue();
     }
 
+    public void onSystemUiVisibilityChanged(int systemUiVisibility) {
+        mIsInTransientImmersiveStickyState =
+                (systemUiVisibility & SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0
+                && (systemUiVisibility & NAVIGATION_BAR_TRANSIENT) != 0;
+    }
+
     private void disposeInputChannel() {
         if (mInputEventReceiver != null) {
             mInputEventReceiver.dispose();
@@ -364,6 +370,7 @@ public class EdgeBackGestureHandler implements DisplayListener {
                 return false;
             }
         }
+
         // Disallow if too far from the edge
         if (x > mEdgeWidth + mLeftInset && x < (mDisplaySize.x - mEdgeWidth - mRightInset)) {
             return false;
