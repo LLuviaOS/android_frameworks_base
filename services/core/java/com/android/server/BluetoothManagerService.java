@@ -168,6 +168,8 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
 
     private BluetoothAirplaneModeListener mBluetoothAirplaneModeListener;
 
+    private BluetoothAirplaneModeListener mBluetoothAirplaneModeListener;
+
     // used inside handler thread
     private boolean mQuietEnable = false;
     private boolean mEnable;
