@@ -3721,7 +3721,7 @@
          on the device.
          Example: "com.android.wellbeing"
      -->
-    <string name="config_defaultWellbeingPackage" translatable="false"></string>
+    <string name="config_defaultWellbeingPackage" translatable="false">com.google.android.apps.wellbeing</string>
 
     <!-- The package name for the system telephony apps.
          This package must be trusted, as it will be granted with permissions with special telephony
