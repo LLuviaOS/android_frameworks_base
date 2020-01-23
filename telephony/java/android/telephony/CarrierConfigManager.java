@@ -3390,6 +3390,22 @@ public class CarrierConfigManager {
             "data_switch_validation_timeout_long";
 
     /**
+     * Title text to be used in the emergency notification displayed when VoWifi is available
+     *
+     * @hide
+     */
+    public static final String KEY_EMERGENCY_NOTIFICATION_TITLE_STRING =
+            "emergency_notification_title_string";
+
+    /**
+     * Summary text to be used in the emergency notification displayed when VoWifi is available
+     *
+     * @hide
+     */
+    public static final String KEY_EMERGENCY_NOTIFICATION_SUMMARY_STRING =
+            "emergency_notification_summary_string";
+
+    /**
      * GPS configs. See the GNSS HAL documentation for more details.
      */
     public static final class Gps {
@@ -4289,6 +4305,8 @@ public class CarrierConfigManager {
         sDefaults.putStringArray(KEY_MISSED_INCOMING_CALL_SMS_ORIGINATOR_STRING_ARRAY,
                 new String[0]);
         sDefaults.putStringArray(KEY_MISSED_INCOMING_CALL_SMS_PATTERN_STRING_ARRAY, new String[0]);
+        sDefaults.putString(KEY_EMERGENCY_NOTIFICATION_SUMMARY_STRING, "");
+        sDefaults.putString(KEY_EMERGENCY_NOTIFICATION_TITLE_STRING, "");
     }
 
     /**
