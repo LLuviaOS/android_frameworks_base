@@ -4785,6 +4785,17 @@ public final class Settings {
         private static final Validator NOTIFICATION_PULSE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+
+         /**
+         * Pulse Ambient lights color
+         * @hide
+         */
+        public static final String NOTIFICATION_PULSE_COLOR = "ambient_notification_light_color";
+
+        private static final Validator NOTIFICATION_PULSE_COLOR_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;;
+
+
          /**
          * Whether to enable Ambient Edge lights
          * @hide
@@ -4983,6 +4994,7 @@ public final class Settings {
             AOD_NOTIFICATION_PULSE,
             AOD_NOTIFICATION_PULSE_CLEAR,
             NOTIFICATION_PULSE_ACCENT,
+            NOTIFICATION_PULSE_COLOR,
             USE_OLD_MOBILETYPE,
             NOTIFICATION_LIGHT_PULSE,
             SCREENSHOT_SHUTTER_SOUND,
@@ -5112,6 +5124,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AOD_NOTIFICATION_PULSE);
             PRIVATE_SETTINGS.add(AOD_NOTIFICATION_PULSE_CLEAR);
             PRIVATE_SETTINGS.add(NOTIFICATION_PULSE_ACCENT);
+            PRIVATE_SETTINGS.add(NOTIFICATION_PULSE_COLOR);
             PRIVATE_SETTINGS.add(SHOW_FOURG);
             PRIVATE_SETTINGS.add(SHOW_VOLTE_ICON);
             PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
@@ -5220,6 +5233,7 @@ public final class Settings {
             VALIDATORS.put(AOD_NOTIFICATION_PULSE, AOD_NOTIFICATION_PULSE_VALIDATOR);
             VALIDATORS.put(AOD_NOTIFICATION_PULSE_CLEAR, AOD_NOTIFICATION_PULSE_CLEAR_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_PULSE_ACCENT, NOTIFICATION_PULSE_ACCENT_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_PULSE_COLOR, NOTIFICATION_PULSE_COLOR_VALIDATOR);
             VALIDATORS.put(SHOW_FOURG, SHOW_FOURG_VALIDATOR);
             VALIDATORS.put(SHOW_VOLTE_ICON, SHOW_VOLTE_ICON_VALIDATOR);
             VALIDATORS.put(VOLTE_ICON_STYLE, VOLTE_ICON_STYLE_VALIDATOR);
