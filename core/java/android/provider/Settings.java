@@ -4785,7 +4785,6 @@ public final class Settings {
         private static final Validator NOTIFICATION_PULSE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
-
          /**
          * Pulse Ambient lights color
          * @hide
@@ -4845,6 +4844,14 @@ public final class Settings {
         public static final String NOTIFICATION_PULSE_ACCENT = "ambient_notification_light_accent";
 
         private static final Validator NOTIFICATION_PULSE_ACCENT_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String NOTIFICATION_PULSE_COLOR_AUTOMATIC = "ambient_notification_light_color_automatic";
+
+        private static final Validator NOTIFICATION_PULSE_COLOR_AUTOMATIC_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
         /**
@@ -5004,6 +5011,7 @@ public final class Settings {
             AOD_NOTIFICATION_PULSE_TIMEOUT,
             NOTIFICATION_PULSE_ACCENT,
             NOTIFICATION_PULSE_COLOR,
+            NOTIFICATION_PULSE_COLOR_AUTOMATIC,
             USE_OLD_MOBILETYPE,
             NOTIFICATION_LIGHT_PULSE,
             SCREENSHOT_SHUTTER_SOUND,
@@ -5135,6 +5143,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AOD_NOTIFICATION_PULSE_TIMEOUT);
             PRIVATE_SETTINGS.add(NOTIFICATION_PULSE_ACCENT);
             PRIVATE_SETTINGS.add(NOTIFICATION_PULSE_COLOR);
+            PRIVATE_SETTINGS.add(NOTIFICATION_PULSE_COLOR_AUTOMATIC);
             PRIVATE_SETTINGS.add(SHOW_FOURG);
             PRIVATE_SETTINGS.add(SHOW_VOLTE_ICON);
             PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
@@ -5245,6 +5254,8 @@ public final class Settings {
             VALIDATORS.put(AOD_NOTIFICATION_PULSE_TIMEOUT, AOD_NOTIFICATION_PULSE_TIMEOUT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_PULSE_ACCENT, NOTIFICATION_PULSE_ACCENT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_PULSE_COLOR, NOTIFICATION_PULSE_COLOR_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_PULSE_COLOR_AUTOMATIC,
+                    NOTIFICATION_PULSE_COLOR_AUTOMATIC_VALIDATOR);
             VALIDATORS.put(SHOW_FOURG, SHOW_FOURG_VALIDATOR);
             VALIDATORS.put(SHOW_VOLTE_ICON, SHOW_VOLTE_ICON_VALIDATOR);
             VALIDATORS.put(VOLTE_ICON_STYLE, VOLTE_ICON_STYLE_VALIDATOR);
