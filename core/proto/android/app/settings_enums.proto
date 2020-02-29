@@ -2449,4 +2449,8 @@ enum PageId {
     // CATEGORY: SETTINGS
     // OS: R
     ADB_WIRELESS_DEVICE_DETAILS = 1836;
+
+    // LLuviaOS Additions
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 2000;
 }
