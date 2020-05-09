@@ -1017,8 +1017,7 @@ public class Build {
     public static final String FINGERPRINT = deriveFingerprint();
 
     /** @hide */
-    public static final String LLUVIA_FINGERPRINT = SystemProperties.get("ro.lluvia.fingerprint",
-            deriveFingerprint());
+    public static final String LLUVIA_FINGERPRINT = getString("ro.build.date");
 
     /**
      * Some devices split the fingerprint components between multiple
