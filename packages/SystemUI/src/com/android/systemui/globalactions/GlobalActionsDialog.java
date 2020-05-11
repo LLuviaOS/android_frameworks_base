@@ -22,7 +22,6 @@ import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STR
 import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN;
 
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
@@ -86,6 +85,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.internal.util.ScreenRecordHelper;
 import com.android.internal.util.ScreenshotHelper;
+import com.android.internal.util.lluvia.lluviaUtils;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -454,7 +454,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             } else if (GLOBAL_ACTION_KEY_LOCKDOWN.equals(actionKey)) {
                 if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                             Settings.Secure.LOCKDOWN_IN_POWER_MENU, 0, getCurrentUser().id) != 0
-                        && shouldDisplayLockdown() && !isInLockTaskMode()) {
+                        && shouldDisplayLockdown() && !lluviaUtils.isInLockTaskMode()) {
                     mItems.add(getLockdownAction());
                     mHasLockdownButton = true;
                 }
@@ -487,7 +487,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey)) {
                 if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                             Settings.Secure.ADVANCED_REBOOT_IN_POWER_MENU, 0,
-                            getCurrentUser().id) != 0 && !isInLockTaskMode()) {
+                            getCurrentUser().id) != 0 && !lluviaUtils.isInLockTaskMode()) {
                     mItems.add(mShowAdvancedToggles);
                 }
             } else {
@@ -1514,7 +1514,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 won't show the LegacyGlobalActions after systemui restart
                 */
                 funcs.onGlobalActionsHidden();
-                restartSystemUI(ctx);
+                Process.killProcess(Process.myPid());
                 break;
             default:
                 break;
@@ -2082,17 +2082,5 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
      */
     private static boolean shouldUseSeparatedView() {
         return true;
-    }
-
-    public static void restartSystemUI(Context ctx) {
-        Process.killProcess(Process.myPid());
-    }
-
-    private boolean isInLockTaskMode() {
-        try {
-            return ActivityManagerNative.getDefault().isInLockTaskMode();
-        } catch (RemoteException e) {
-            return false;
-        }
     }
 }
