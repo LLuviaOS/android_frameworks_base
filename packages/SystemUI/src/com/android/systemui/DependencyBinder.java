@@ -16,6 +16,8 @@
 
 package com.android.systemui;
 
+import com.android.systemui.lluvia.LLuviaSettingsService;
+import com.android.systemui.lluvia.LLuviaSettingsServiceImpl;
 import com.android.systemui.appops.AppOpsController;
 import com.android.systemui.appops.AppOpsControllerImpl;
 import com.android.systemui.classifier.FalsingManagerProxy;
@@ -241,4 +243,9 @@ public abstract class DependencyBinder {
      */
     @Binds
     public abstract FalsingManager provideFalsingmanager(FalsingManagerProxy falsingManagerImpl);
+
+    /**
+     */
+    @Binds
+    public abstract LLuviaSettingsService provideLLuviaSettingsService(LLuviaSettingsServiceImpl controllerImpl);
 }
