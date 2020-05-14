@@ -383,7 +383,7 @@ java_library {
         "android.hardware.vibrator-V1.3-java",
         "android.hardware.wifi-V1.0-java-constants",
         "devicepolicyprotosnano",
-
+        "vendor.lineage.touch-V1.0-java",
         "com.android.sysprop.apex",
         "com.android.sysprop.init",
         "PlatformProperties",
