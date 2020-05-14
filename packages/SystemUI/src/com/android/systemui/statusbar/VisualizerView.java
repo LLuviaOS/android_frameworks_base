@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2018-2019 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +34,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.UiOffloadThread;
 import com.android.internal.graphics.palette.Palette;
-import com.android.internal.util.crdroid.ColorAnimator;
+import com.android.internal.util.lluvia.ColorAnimator;
 
 public class VisualizerView extends View
         implements Palette.PaletteAsyncListener, TunerService.Tunable,
