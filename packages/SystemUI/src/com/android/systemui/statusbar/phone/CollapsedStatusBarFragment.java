@@ -70,6 +70,25 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private DarkIconManager mDarkIconManager;
     private View mOperatorNameFrame;
     private CommandQueue mCommandQueue;
+    private ContentResolver mContentResolver;
+
+    // Custom Carrier
+    private View mCustomCarrierLabel;
+    private int mShowCarrierLabel;
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+        }
+    }
+
+    private SettingsObserver mSettingsObserver;
 
     // clock position
     private ClockController mClockController;
@@ -112,6 +131,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         Dependency.get(StatusBarIconController.class).addIconGroup(mDarkIconManager);
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
         mClockController = new ClockController(mStatusBar);
+        mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
+        updateSettings(false);
         showSystemIconArea(false);
         showClock(false);
         initEmergencyCryptkeeperText();
@@ -407,4 +428,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void onDozingChanged(boolean isDozing) {
         disable(getContext().getDisplayId(), mDisabled1, mDisabled1, false /* animate */);
     }
+
+    public void updateSettings(boolean animate) {
+        mShowCarrierLabel = Settings.System.getIntForUser(
+                mContentResolver, Settings.System.STATUS_BAR_CARRIER, 1,
+                UserHandle.USER_CURRENT);
+    }
+
 }
