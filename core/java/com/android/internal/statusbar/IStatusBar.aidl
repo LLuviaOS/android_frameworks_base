@@ -180,4 +180,5 @@ oneway interface IStatusBar
      * LLuvia
      */
     void toggleCameraFlash();
+    void setPartialScreenshot(boolean active);
 }

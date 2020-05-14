@@ -119,4 +119,5 @@ interface IStatusBarService
      * LLuvia
      */
     void toggleCameraFlash();
+    void setPartialScreenshot(boolean active);
 }
