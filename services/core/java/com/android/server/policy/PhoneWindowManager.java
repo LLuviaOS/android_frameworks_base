@@ -6228,4 +6228,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, true, "Screenshot");
         lluviaUtils.takeScreenshot(true);
     }
+
+    // Notifications
+    private void toggleNotifications() {
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, true, "Notifications");
+        lluviaUtils.toggleNotifications();
+    }
 }
