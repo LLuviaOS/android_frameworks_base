@@ -730,6 +730,9 @@ public class EdgeBackGestureHandler implements DisplayListener {
             case 12: // Ringer modes
                 lluviaUtils.toggleRingerModes(mContext);
                 break;
+            case 13: // Kill app
+                lluviaUtils.killForegroundApp();
+                break;
             case 14: // Skip song
                 lluviaUtils.sendSystemKeyToStatusBar(KeyEvent.KEYCODE_MEDIA_NEXT);
                 break;
